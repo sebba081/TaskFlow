@@ -64,7 +64,7 @@ ordenador.ordenar(listaDeTareas);
 
 Este diagrama muestra cómo los distintos patrones de diseño están integrados en el sistema:
 
-![Diagrama UML TaskFlow](img/uml_diagrama.png)
+![Diagrama UML TaskFlow](img/uml_diagrama.svg)
 
 **Explicación de componentes:**
 
