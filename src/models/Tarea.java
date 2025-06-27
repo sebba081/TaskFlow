@@ -7,15 +7,13 @@ public class Tarea {
     private int prioridad;
     private LocalDate fechaLimite;
     private String estado;
-    private String categoria;
 
     // Constructor
-    public Tarea(String descripcion, String prioridadStr, LocalDate fechaLimite, String estado, String categoria) {
+    public Tarea(String descripcion, String prioridadStr, LocalDate fechaLimite, String estado) {
         this.descripcion = descripcion;
         this.setPrioridad(prioridadStr);
         this.fechaLimite = fechaLimite;
         this.estado = estado;
-        this.categoria = categoria;
     }
 
     // Getters
@@ -33,10 +31,6 @@ public class Tarea {
 
     public String getEstado() {
         return estado;
-    }
-
-    public String getCategoria() {
-        return categoria;
     }
 
     // Setters
@@ -71,16 +65,11 @@ public class Tarea {
         this.estado = estado;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     @Override
     public String toString() {
         return "Tarea: " + descripcion +
                 " | Prioridad: " + prioridad +
                 " | Fecha límite: " + fechaLimite +
-                " | Estado: " + estado +
-                " | Categoría: " + categoria;
+                " | Estado: " + estado;
     }
 }

@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDate;
 
-public class TareaNormal implements Tarea {
+public class TareaNormal {
     private String descripcion;
     private LocalDate fecha;
 
@@ -19,7 +19,6 @@ public class TareaNormal implements Tarea {
         return fecha;
     }
 
-    @Override
     public int getPrioridad() {
         return 1;
     }

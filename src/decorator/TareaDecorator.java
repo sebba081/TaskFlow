@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public abstract class TareaDecorator {
     protected Tarea tarea;
 
-    public TareaDecorator(Tarea tarea) {
+    protected TareaDecorator(Tarea tarea) {
         this.tarea = tarea;
     }
 
@@ -16,7 +16,7 @@ public abstract class TareaDecorator {
     }
 
     public LocalDate getFecha() {
-        return tarea.getFecha();
+        return tarea.getFechaLimite();
     }
 
     public int getPrioridad() {

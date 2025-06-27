@@ -46,6 +46,12 @@ public class Main {
     }
 
     private static void mostrarMenu() {
+        // limpiar la consola
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        mostrarRecordatorios();
+
         System.out.println("\n--- Menú ---");
         System.out.println("1. Agregar tarea");
         System.out.println("2. Mostrar tareas");
@@ -54,20 +60,31 @@ public class Main {
         System.out.print("Seleccione una opción: ");
     }
 
+    private static void mostrarRecordatorios() {
+        List<Tarea> recordatorios = sistema.obtenerRecordatorios();
+        if (!recordatorios.isEmpty()) {
+            System.out.println("Recordatorios (tareas próximas):");
+            for (Tarea t : recordatorios) {
+                System.out.println(" - " + t.getDescripcion() + " (vence el " + t.getFechaLimite() + ")");
+            }
+            System.out.println();
+        }
+    }
+
     private static void agregarTarea() {
         System.out.println("\n--- Agregar Nueva Tarea ---");
-        
+
         // Descripción
         System.out.print("Ingrese la descripción de la tarea: ");
         String descripcion = scanner.nextLine();
-        
+
         // Prioridad
         String prioridad;
         do {
             System.out.print("Ingrese la prioridad (baja/normal/alta/urgente): ");
             prioridad = scanner.nextLine().toLowerCase();
         } while (!prioridad.matches("baja|normal|alta|urgente"));
-        
+
         // Fecha límite
         LocalDate fechaLimite;
         while (true) {
@@ -80,19 +97,16 @@ public class Main {
                 System.out.println("Formato de fecha inválido. Por favor, use el formato YYYY-MM-DD.");
             }
         }
-        
+
         // Estado
         String estado = "pendiente"; // Por defecto, una nueva tarea está pendiente
-        
-        // Categoría
-        System.out.print("Ingrese la categoría de la tarea: ");
-        String categoria = scanner.nextLine();
-        
+
         // Crear la tarea usando el Factory
-        Tarea tarea = TareaFactory.crearTarea(prioridad, descripcion, fechaLimite, estado, categoria);
+        Tarea tarea = TareaFactory.crearTarea(prioridad, descripcion, fechaLimite, estado);
         sistema.agregarTarea(tarea);
-        
+
         System.out.println("Tarea agregada con éxito.");
+        esperarEnter();
     }
 
     private static void mostrarTareas() {
@@ -104,6 +118,7 @@ public class Main {
                 System.out.println(t); // Esto usará el método toString() de Tarea
             }
         }
+        esperarEnter();
     }
 
     private static void ordenarTareas() {
@@ -113,10 +128,15 @@ public class Main {
 
         System.out.println("\nTareas ordenadas por prioridad:");
         for (Tarea t : ordenadas) {
-            System.out.println(t.getDescripcion() + " - Prioridad: " + t.getPrioridad() + 
-                               " - Fecha límite: " + t.getFechaLimite() + 
-                               " - Estado: " + t.getEstado() + 
-                               " - Categoría: " + t.getCategoria());
+            System.out.println(t.getDescripcion() + " - Prioridad: " + t.getPrioridad() +
+                    " - Fecha límite: " + t.getFechaLimite() +
+                    " - Estado: " + t.getEstado());
         }
+        esperarEnter();
+    }
+
+    public static void esperarEnter() {
+        System.out.println("\nPresione Enter para continuar...");
+        scanner.nextLine();
     }
 }
